@@ -14,6 +14,9 @@
 #' for example "WVB" for women's volleyball and "MVB" for men's volleyball).
 #'
 #' @note
+#' This function **requires internet connectivity** as it checks the
+#' [NCAA website](https://stats.ncaa.org) for information.
+#'
 #' This function is a modification of the `ncaa_teams()` function from the
 #' [`{baseballr}`](https://billpetti.github.io/baseballr/) package.
 #'
@@ -44,7 +47,7 @@ get_teams <- function(year = NULL,
     error = function(cnd) {
       cli::cli_warn("No website available.")
     },
-    request_url(url)
+    request_url(url = url)
   )
   if (length(resp) == 1) {
     if (grepl(pattern = "No website available", resp)) return(invisible())
@@ -86,7 +89,15 @@ get_teams <- function(year = NULL,
                              "&conf_id=", x,
                              "&division=", division,
                              "&sport_code=", sport)
-    resp <- request_url(url = conf_team_urls)
+    resp <- tryCatch(
+      error = function(cnd) {
+        cli::cli_warn("No website available.")
+      },
+      request_url(url = conf_team_urls)
+    )
+    if (length(resp) == 1) {
+      if (grepl(pattern = "No website available", resp)) return(invisible())
+    }
 
     team_urls <- resp |>
       httr2::resp_body_html() |>

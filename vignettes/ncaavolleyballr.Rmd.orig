@@ -1,20 +1,20 @@
 ---
 title: "Get started"
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Get started}
-  %\VignetteEngine{quarto::html}
+  %\VignetteIndexEntry{ncaavolleyballr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-knitr:
-  opts_chunk:
-    collapse: true
-    comment: '#>'
-format: 
-  html:
-    df-print: kable
 ---
 
-```{r}
-#| label: setup
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
 library(ncaavolleyballr)
 ```
 
@@ -22,7 +22,7 @@ The NCAA has a lot of sports stats available at <https://stats.ncaa.org>. This p
 
 ## Finding teams
 
-The NCAA uses a unique team ID for each women\'s and men\'s volleyball team and each season. So first you will need to get that ID with the `find_team_id()`.  I\'ll use Nebraska to illustrate the functions in [`{ncaavolleyballr}`](https://jeffreyrstevens.github.io/ncaavolleyballr/). 
+The NCAA uses a unique team ID for each women\'s and men\'s volleyball team and each season. So first you will need to get that ID with the `find_team_id()`.  I\'ll use Nebraska to illustrate the functions in [`{ncaavolleyballr}`](https://jeffreyrstevens.github.io/ncaavolleyballr/).
 
 However, before we find the team ID, we first have to know the exact team name that the NCAA uses to reference each team. Is Nebraska's team name Nebraska, Neb., University of Nebraska-Lincoln, UNL, or something else? We can use `find_team_name()` to get a vector of teams that match a pattern.
 
@@ -40,7 +40,7 @@ OK, let's find Nebraska's team ID for 2024.
 find_team_id("Nebraska", 2024)
 ```
 
-We'll need this team ID to access all of the team's statistics. You can either assign the output to an object or just add it to the top of your pipeline. 
+We'll need this team ID to access all of the team's statistics. You can either assign the output to an object or just add it to the top of your pipeline.
 
 You can also pass vectors of team names and years to find team IDs for multiple teams and years.
 
@@ -102,11 +102,11 @@ Here's a table describing the different team statistics returned.
 ```{r}
 #| label: stat-table
 data.frame(Stat = colnames(team_season_stats(team = "Nebraska"))[4:20],
-           Description = c("Sets played", "Kills", "Attack errors", "Attacks", 
+           Description = c("Sets played", "Kills", "Attack errors", "Attacks",
                            "Hit percentage [(kills-errors)/attacks]", "Assists",
-                           "Ace serves", "Service errors", "Digs", 
-                           "Reception attempts", "Reception errors", 
-                           "Solo blocks", "Block assists", "Block errors", 
+                           "Ace serves", "Service errors", "Digs",
+                           "Reception attempts", "Reception errors",
+                           "Solo blocks", "Block assists", "Block errors",
                            "Points", "Ball handling errors", "Triple doubles"))
 ```
 
@@ -134,12 +134,12 @@ This returns all of the stats included by `team_season_stats()`, plus GP and GS,
 ```{r eval=FALSE, echo=FALSE}
 #| label: stats-table2
 data.frame(Stat = names(player_season_stats(find_team_id("Nebraska", 2024)))[11:29],
-           Description = c("Games played", "Games started", "Sets played", 
-                           "Kills", "Attack errors", "Attacks", 
-                           "Kill percentage [(kills-errors)/attacks]", 
-                           "Assists", "Ace serves", "Service errors", "Digs", 
-                           "Reception attempts", "Reception errors", 
-                           "Solo blocks", "Block assists", "Block errors", 
+           Description = c("Games played", "Games started", "Sets played",
+                           "Kills", "Attack errors", "Attacks",
+                           "Kill percentage [(kills-errors)/attacks]",
+                           "Assists", "Ace serves", "Service errors", "Digs",
+                           "Reception attempts", "Reception errors",
+                           "Solo blocks", "Block assists", "Block errors",
                            "Points", "Ball handling errors", "Triple doubles"))
 ```
 
@@ -150,7 +150,7 @@ In addition to overall season summary stats, the NCAA provides match-level data 
 
 ### Team match stats
 
-To get overall match stats for a team in a particular season, use `team_match_stats()`. 
+To get overall match stats for a team in a particular season, use `team_match_stats()`.
 
 ```{r}
 #| label: teammatchstats
@@ -198,7 +198,7 @@ match_pbp(contest = "6080708") |>
 
 ## Aggregating data
 
-Though the season, match, and play-by-play data are useful at the individual level, they can be more useful when aggregated. The `group_stats()` function aggregates season, match, and play-by-play data over multiple teams and/or years by applying the `player_season_stats()`,  `player_match_stats()`, or `match_pbp()` across teams and years. 
+Though the season, match, and play-by-play data are useful at the individual level, they can be more useful when aggregated. The `group_stats()` function aggregates season, match, and play-by-play data over multiple teams and/or years by applying the `player_season_stats()`,  `player_match_stats()`, or `match_pbp()` across teams and years.
 
 ```{r}
 #| label: groupstats-season

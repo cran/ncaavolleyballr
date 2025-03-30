@@ -10,9 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ncaavolleyballr)](https://CRAN.R-project.org/package=ncaavolleyballr)
 [![Codecov test
 coverage](https://codecov.io/gh/JeffreyRStevens/ncaavolleyballr/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/ncaavolleyballr)
-
 <!-- badges: end -->
 
 Inspired by the NCAA data extraction functions from the
@@ -27,6 +28,13 @@ aggregate statistics for teams, conferences, divisions, or custom groups
 of teams.
 
 ## Installation
+
+You can install the stable released version of flashr from
+[CRAN](https://cran.r-project.org/package=ncaavolleyballr) with:
+
+``` r
+install.packages("ncaavolleyballr")
+```
 
 You can install developmental versions from
 [GitHub](https://github.com/) with:
@@ -192,7 +200,7 @@ To cite
 use:
 
 Stevens JR (2025). *Extract Data from NCAA Women’s and Men’s Volleyball
-Website*. R package version 0.4.1,
+Website*. R package version 0.4.2,
 <https://github.com/JeffreyRStevens/ncaavolleyballr>.
 
 ## Acknowledgments

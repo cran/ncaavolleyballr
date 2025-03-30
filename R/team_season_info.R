@@ -15,12 +15,14 @@
 #'
 #' @export
 #'
+#' @note
+#' This function **requires internet connectivity** as it checks the
+#' [NCAA website](https://stats.ncaa.org) for information.
+#'
 #' @family functions that extract team statistics
 #'
-#' @examples
-#' \donttest{
+#' @examplesIf interactive()
 #' team_season_info(team_id = "585290")
-#' }
 team_season_info <- function(team_id = NULL) {
   # check input
   check_team_id(team_id)
@@ -33,7 +35,7 @@ team_season_info <- function(team_id = NULL) {
     error = function(cnd) {
       cli::cli_warn("No website available for team ID {team_id}.")
     },
-    request_url(url)
+    request_url(url = url)
   )
   if (length(resp) == 1) {
     if (grepl(pattern = "No website available for team ID", resp)) return(invisible())

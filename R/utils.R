@@ -335,17 +335,20 @@ html_table_raw <- function(x,
 #' Submit URL request, check, and return response
 #'
 #' @param url URL for request.
-#' @param timeout Numeric of maximum number of seconds to wait for timeout.
+#'
+#' @note
+#' This function **requires internet connectivity** as it checks the
+#' [NCAA website](https://stats.ncaa.org) for information.
 #'
 #' @keywords internal
 #'
-request_url <- function(url, timeout = 5) {
+request_url <- function(url) {
   # First check internet connection
   if (!curl::has_internet()) {
     message("No internet connection.")
     return(invisible(NULL))
   }
-  # Perform request and record response
+  # Create random company and user name
   company <- sample(c(0:9, LETTERS),
                     size = sample(6:12, size = 1),
                     replace = TRUE) |>
@@ -355,6 +358,7 @@ request_url <- function(url, timeout = 5) {
                     replace = TRUE) |>
     paste0(collapse = "")
 
+  # Perform request and record response
   response <- httr2::request(url) |>
     httr2::req_user_agent(paste0(company, " ", tolower(user), "@", tolower(company), ".com")) |>
     httr2::req_perform()
@@ -375,14 +379,3 @@ save_df <- function(x, label, group, year, division, conf, sport, path) {
   utils::write.csv(x,
                    paste0(path, tolower(sport), "_", label, "_", confdiv, "_", year, ".csv"), row.names = FALSE)
 }
-
-
-
-
-#' Table filling algorithm
-#'
-#' Copied and modified from `{rvest}`
-#' https://github.com/tidyverse/rvest/blob/main/R/table.R
-#'
-#' @keywords internal
-#'
