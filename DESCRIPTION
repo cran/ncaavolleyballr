@@ -1,7 +1,7 @@
 Package: ncaavolleyballr
 Type: Package
 Title: Extract Data from NCAA Women's and Men's Volleyball Website
-Version: 0.4.2
+Version: 0.4.3
 Authors@R: 
     person("Jeffrey R.", "Stevens", , "jeffrey.r.stevens@protonmail.com", 
     role = c("aut", "cre", "cph"),
@@ -19,15 +19,15 @@ Depends: R (>= 4.2)
 RoxygenNote: 7.3.2
 Imports: cli, curl, dplyr, httr2, lifecycle, purrr, rlang, rvest,
         stringr, tibble, tidyr, xml2
-Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
+Suggests: chromote, knitr, rmarkdown, testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://github.com/JeffreyRStevens/ncaavolleyballr,
         https://jeffreyrstevens.github.io/ncaavolleyballr/
 BugReports: https://github.com/JeffreyRStevens/ncaavolleyballr/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2025-03-30 21:28:59 UTC; jstevens
-Author: Jeffrey R. Stevens [aut, cre, cph]
-    (<https://orcid.org/0000-0003-2375-1360>)
+Packaged: 2025-07-22 22:22:34 UTC; jstevens
+Author: Jeffrey R. Stevens [aut, cre, cph] (ORCID:
+    <https://orcid.org/0000-0003-2375-1360>)
 Repository: CRAN
-Date/Publication: 2025-03-30 23:20:02 UTC
+Date/Publication: 2025-07-22 22:40:02 UTC
